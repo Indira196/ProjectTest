@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\beranda;
 use Illuminate\Http\Request;
 
-class BerandaController extends Controller
+class berandaC extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswa = DB::table('mahasiswa')->paginate(20);
+        return view('berandaview',['mahasiswa' => $mahasiswa]);
     }
 
     /**
