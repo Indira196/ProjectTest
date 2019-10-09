@@ -8,7 +8,7 @@
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Nama</label>
-      <input type="text" class="form-control" name="nama" ">
+      <input type="text" class="form-control" name="nama">
     </div>
   </div>
   <div class="form-row">
