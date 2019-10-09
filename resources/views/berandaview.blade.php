@@ -84,18 +84,18 @@
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
-				<a href="/formTambahData" class="button4"><i class="ti-plus">Tambah Data</i></a>
+				<a href="formTambahData" class="button4"><i class="ti-plus">Tambah Data</i></a>
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">
 						<table>
 							<thead>
-								<tr class="row100 head">
-									<th class="cell100 column5">No</th>
-									<th class="cell100 column1">NIM</th>
-									<th class="cell100 column2">Nama</th>
-									<th class="cell100 column3">Jurusan</th>
-									<th class="cell100 column4">Alamat</th>
-									<th class="cell100 column5">Action</th>
+								<tr>
+									<th>No</th>
+									<th>NIM</th>
+									<th>Nama</th>
+									<th>Jurusan</th>
+									<th>Alamat</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 						</table>
@@ -106,16 +106,17 @@
 							<tbody>
 							@php ($k = (20 * ($mahasiswa->currentPage()-1))+1)
 							@foreach ($mahasiswa as $mhs)
-								<tr class="row100 body">
-									<td class="cell100 column6">{{ ++$i }}</td>
-									<td class="cell100 column1">{{ $mhs->nim }}</td>
-									<td class="cell100 column2">{{ $mhs->nama }}</td>
-									<td class="cell100 column3">{{ $mhs->jurusan }}</td>
-									<td class="cell100 column4">{{ $mhs->alamat }}</td>
-									<td class="cell100 column5">
-										<a href="#" class="button button 2"><i class="ti-pencil">Ubah</i></a>
-										<a href="#" class="button button 3"><i class="ti-pencil">Ubah</i></a>
+								<tr>
+									<td>{{ $k++ }}</td>
+									<td>{{ $mhs->nim }}</td>
+									<td>{{ $mhs->nama }}</td>
+									<td>{{ $mhs->jurusan }}</td>
+									<td>{{ $mhs->alamat }}</td>
+									<td>
+										<a href="formEditData/{{ $mhs->id_mahasiswa }}" class="button button 2"><i class="ti-pencil">Ubah</i></a>
+										<a href="formHapusData/{{ $mhs->id_mahasiswa }}" class="button button 3"><i class="ti-pencil">Hapus</i></a>
 									</td>
+									@csrf
 								</tr>
 							@endforeach
 							</tbody>
