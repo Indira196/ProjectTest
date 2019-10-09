@@ -23,86 +23,55 @@ class berandaC extends Controller
 
     public function formTambahData () //menampilkan form tambah data
     {
-        $mahasiswa = mahasiswa::all();
+        $mahasiswa = beranda::all();
 
         return view('formtambahdata',['mahasiswa' => $mahasiswa]);
     }
 
     public function simpanData(Request $request)
     {
-        $datamahasiswa = new mahasiswa();
+        $datamahasiswa = new beranda();
         $datamahasiswa->id_mahasiswa=$request->id_mahasiswa;
-        $datamahasiswa->nim->$request->nim;
-        $datamahasiswa->nama->$request->nama;
-        $datamahasiswa->jurusan->$request->jurusan;
-        $datamahasiswa->alamat->$request->alamat;
+        $datamahasiswa->nim=$request->nim;
+        $datamahasiswa->nama=$request->nama;
+        $datamahasiswa->jurusan=$request->jurusan;
+        $datamahasiswa->alamat=$request->alamat;
         $datamahasiswa->save();
+
+        return redirect('/');
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function formEditData($id_mahasiswa) //menampilkan form edit data mahasiswa
     {
-        //
+        $mahasiswa = beranda::find($id_mahasiswa);
+        $datamahasiswa = beranda::all();
+
+        return view('formeditdata',['mahasiswa' => $mahasiswa,'datamahasiswa' => $datamahasiswa]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function editData(Request $request)
     {
-        //
+        beranda::find($request->id_mahasiswa)->update([
+            'id_mahasiswa' => $request->id_mahasiswa,
+            'nim'          => $request->nim,
+            'nama'         => $request->nama,
+            'jurusan'      => $request->jurusan,
+            'alamat'       => $request->alamat
+        ]);
+        return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\beranda  $beranda
-     * @return \Illuminate\Http\Response
-     */
-    public function show(beranda $beranda)
+    public function formHapusData($id_mahasiswa) // menampilkan form hapus data
     {
-        //
+        $mahasiswa = beranda::find($id_mahasiswa);
+        return view('formhapusdata',['mahasiswa' => $mahasiswa]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\beranda  $beranda
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(beranda $beranda)
+    public function hapusData($id_mahasiswa)
     {
-        //
-    }
+        $mahasiswa = beranda::where('id_mahasiswa', $id_mahasiswa)->first();
+        $mahasiswa->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\beranda  $beranda
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, beranda $beranda)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\beranda  $beranda
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(beranda $beranda)
-    {
-        //
+        return redirect('/');
     }
 }
