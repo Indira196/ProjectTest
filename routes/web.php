@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('berandaview');
-});
+Route::get('/','berandaC@index');
+Route::get('/formTambahData', 'berandaC@formTambahData');
+Route::post('/simpanData','berandaC@simpanData');
+Route::get('/formEditData/{id}','berandaC@formEditData');
+Route::post('/editData','berandaC@editData');
+Route::get('/formHapusData/{id}','berandaC@formHapusData');
+Route::post('/hapusData/{id}','berandaC@hapusData');
 
