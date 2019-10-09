@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\beranda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\Validator;
 
 class berandaC extends Controller
 {
@@ -12,11 +14,31 @@ class berandaC extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() // menampilkan tabel mahasiswa
     {
         $mahasiswa = DB::table('mahasiswa')->paginate(20);
-        return view('berandaview',['mahasiswa' => $mahasiswa]);
+
+       return view('berandaview',['mahasiswa'=> $mahasiswa]);
     }
+
+    public function formTambahData () //menampilkan form tambah data
+    {
+        $mahasiswa = mahasiswa::all();
+
+        return view('formtambahdata',['mahasiswa' => $mahasiswa]);
+    }
+
+    public function simpanData(Request $request)
+    {
+        $datamahasiswa = new mahasiswa();
+        $datamahasiswa->id_mahasiswa=$request->id_mahasiswa;
+        $datamahasiswa->nim->$request->nim;
+        $datamahasiswa->nama->$request->nama;
+        $datamahasiswa->jurusan->$request->jurusan;
+        $datamahasiswa->alamat->$request->alamat;
+        $datamahasiswa->save();
+    }
+
 
     /**
      * Show the form for creating a new resource.
